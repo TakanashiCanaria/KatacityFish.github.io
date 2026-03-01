@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>素材買取ツール</title>
+  <meta name="description" content="KatacityFish Dashboard - 素材買取" />
+
+  <!-- Bootstrap (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="d-flex">
+    <nav id="sidebar" class="bg-dark text-white p-3" style="min-width:200px;">
+      <h2 class="h6 text-white">メニュー</h2>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a class="nav-link text-white" href="index.html">トップ</a></li>
+        <li class="nav-item"><a class="nav-link text-white active" href="other.html">別ページ</a></li>
+      </ul>
+    </nav>
+
+    <div class="flex-grow-1">
+      <header class="bg-dark text-white py-2">
+        <div class="container">
+          <div class="d-flex align-items-center">
+            <h1 class="h5 mb-0">素材買取ツール</h1>
+          </div>
+        </div>
+      </header>
+
+      <main class="container py-4">
+        <!-- 説明 -->
+        <header class="mb-4">
+          <h1 class="h3">素材の単価入力</h1>
+          <p class="text-muted">数量と単価を入力すると小計と合計が自動で計算されます。</p>
+        </header>
+
+        <!-- 合計表示 -->
+        <div class="row mb-4 g-3">
+          <div class="col-sm-6 col-md-4">
+            <div class="card shadow-sm">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="text-muted small">合計</div>
+                  <div id="totalAmount" class="h5 monospace">¥0</div>
+                </div>
+                <div class="text-end">
+                  <div class="text-muted small">合計個数</div>
+                  <div id="totalQuantity" class="h5 monospace">0</div>
+                </div>
+                <div class="ms-3">
+                  <button id="copyTotalBtn" class="btn btn-sm btn-outline-secondary">合計をコピー</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 素材一覧テーブル -->
+        <section>
+          <div class="card mb-3">
+            <div class="card-header">素材一覧</div>
+            <div class="card-body table-responsive">
+              <table id="materialsTable" class="table table-striped align-middle mb-0">
+                <thead>
+                  <tr><th>品目</th><th>単価</th><th style="width:160px">個数</th><th style="width:120px">小計</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>鉄</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>銅</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>鋼鉄</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>プラスチック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ガラス</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ゴム</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>クリプトスティック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>強化プラスチック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // フォーマット
+    function formatYen(n){ return '¥' + Number(n).toLocaleString('ja-JP'); }
+
+    // 合計・小計更新
+    function updateTotals(){
+      const qtyInputs = Array.from(document.querySelectorAll('.qty-input'));
+      let totalQty = 0;
+      let totalAmount = 0;
+      qtyInputs.forEach(input => {
+        let price = 0;
+        const priceInput = input.closest('tr')?.querySelector('.price-input');
+        if (priceInput) price = Number(priceInput.value) || 0;
+        else price = Number(input.dataset.price) || 0;
+        let qty = parseInt(input.value, 10);
+        if (isNaN(qty) || qty < 0) { qty = 0; input.value = 0; }
+        totalQty += qty;
+        const subtotal = price * qty;
+        totalAmount += subtotal;
+        const row = input.closest('tr');
+        if (row){
+          const subEl = row.querySelector('.row-subtotal');
+          if (subEl) subEl.textContent = formatYen(subtotal);
+        }
+      });
+      document.getElementById('totalQuantity').textContent = totalQty;
+      document.getElementById('totalAmount').textContent = formatYen(totalAmount);
+    }
+
+    async function copyTotal(){
+      const totalEl = document.getElementById('totalAmount');
+      if (!totalEl) return;
+      const text = totalEl.textContent || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        const btn = document.getElementById('copyTotalBtn');
+        const prev = btn.textContent;
+        btn.textContent = 'コピー済';
+        btn.disabled = true;
+        setTimeout(()=>{ btn.textContent = prev; btn.disabled = false; }, 1200);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch(e){}
+        ta.remove();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('copyTotalBtn')?.addEventListener('click', copyTotal);
+      document.addEventListener('input', function(e){
+        if (e.target && e.target.classList && e.target.classList.contains('qty-input')) {
+          updateTotals();
+        }
+      });
+      updateTotals();
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
