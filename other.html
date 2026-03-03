@@ -58,25 +58,50 @@
         </div>
 
         <!-- 素材一覧テーブル -->
-        <section>
-          <div class="card mb-3">
-            <div class="card-header">素材一覧</div>
-            <div class="card-body table-responsive">
-              <table id="materialsTable" class="table table-striped align-middle mb-0">
+          <section>
+            <!-- 幅をおさかなページと揃え、右寄せにするために列を限定 -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-header">素材一覧</div>
+                  <div class="card-body table-responsive">
+                    <table id="materialsTable" class="table table-striped align-middle mb-0">
                 <thead>
                   <tr><th>品目</th><th>単価</th><th style="width:160px">個数</th><th style="width:120px">小計</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>鉄</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>銅</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>鋼鉄</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>プラスチック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>ガラス</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>ゴム</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>クリプトスティック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>強化プラスチック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="0"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>銅</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="1500"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>鉄</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="2000"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>鋼鉄</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="3500"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>アルミ</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="2500"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>アルミニウム粉末</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="2000"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>メタルスクラップ</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="2500"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ガラス</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="5000"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>プラスチック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="7000"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ゴム</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="2000"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>クリプトスティック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="70000" placeholder="70000～90000"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>強化プラスチック</td><td><input class="form-control form-control-sm small-input price-input" type="number" min="0" value="70000" placeholder="70000～90000"></td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0"></td><td class="monospace row-subtotal">¥0</td></tr>
                 </tbody>
               </table>
+                  </div>
+                </div>
+              </div> <!-- .col-md-6 -->
+
+              <!-- 右側テキスト入力用パネル（将来インポート機能などを実装予定） -->
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-header">データ貼り付け</div>
+                  <div class="card-body">
+                    <p class="small text-muted">カンマ区切りの文字列をここに貼り付けると、<br>価格を一括編集できます。</p>
+                    <textarea id="importArea" class="form-control" rows="8" placeholder="例: 銅,1500"></textarea>
+                    <button id="processImportBtn" class="btn btn-sm btn-primary mt-2">処理</button>
+                    <div id="importMessage" class="mt-2 text-success"></div>
+                    <p class="small text-muted mt-2">入力は「品目名,価格」のペアを改行区切りで記述。順不同や部分的な指定も可です。</p>
+                    <p class="small"><strong>例：</strong><br>銅,1500<br>鉄,2000<br>鋼鉄,3500<br>アルミ,2500<br>アルミニウム粉末,2000<br>メタルスクラップ,2500<br>ガラス,5000<br>プラスチック,7000<br>ゴム,2000<br>クリプトスティック,70000<br>強化プラスチック,70000</p>
+                  </div>
+                </div>
+              </div> <!-- .col-md-6 -->
+            </div> <!-- .row -->
             </div>
           </div>
         </section>
@@ -139,6 +164,38 @@
       document.addEventListener('input', function(e){
         if (e.target && e.target.classList && e.target.classList.contains('qty-input')) {
           updateTotals();
+        }
+      });
+      // 取り込み処理ボタン
+      document.getElementById('processImportBtn')?.addEventListener('click', function(){
+        const text = document.getElementById('importArea')?.value || '';
+        const lines = text.split(/\r?\n/);
+        let updated = 0;
+        lines.forEach(line => {
+          const parts = line.split(',');
+          if (parts.length >= 2) {
+            const name = parts[0].trim();
+            const num = Number(parts[1].trim());
+            if (name && !isNaN(num)) {
+              // 該当する行を探す
+              const row = Array.from(document.querySelectorAll('#materialsTable tbody tr'))
+                .find(tr => tr.cells[0].textContent.trim() === name);
+              if (row) {
+                const priceInput = row.querySelector('.price-input');
+                if (priceInput) {
+                  priceInput.value = num;
+                  updated++;
+                }
+              }
+            }
+          }
+        });
+        const msgEl = document.getElementById('importMessage');
+        if (updated > 0) {
+          updateTotals();
+          if (msgEl) msgEl.textContent = updated + ' 件の価格を更新しました。';
+        } else {
+          if (msgEl) msgEl.textContent = '更新できる項目がありませんでした。';
         }
       });
       updateTotals();
